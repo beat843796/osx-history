@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>macOS Timeline</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <h1>macOS Release Timeline</h1>
+    </header>
+
+    <section id="timeline" class="timeline" aria-label="macOS release timeline"></section>
+  </main>
+
+  <aside id="callout" class="callout" role="dialog" aria-modal="false" aria-hidden="true">
+    <div class="callout-header">
+      <h2 id="callout-title"></h2>
+      <button id="callout-close" class="callout-close" type="button" aria-label="Close details">&times;</button>
+    </div>
+    <dl class="callout-body">
+      <div class="row">
+        <dt>Name</dt>
+        <dd data-field="name"></dd>
+      </div>
+      <div class="row">
+        <dt>Darwin</dt>
+        <dd data-field="darwin"></dd>
+      </div>
+      <div class="row">
+        <dt>Release</dt>
+        <dd data-field="release"></dd>
+      </div>
+      <div class="row">
+        <dt>Latest</dt>
+        <dd data-field="latest"></dd>
+      </div>
+      <div class="row">
+        <dt>Latest Release</dt>
+        <dd data-field="latest-release"></dd>
+      </div>
+      <div class="row">
+        <dt>Status</dt>
+        <dd class="status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span data-field="status"></span>
+        </dd>
+      </div>
+    </dl>
+  </aside>
+
+  <script>
+    const timelineEl = document.getElementById('timeline');
+    const calloutEl = document.getElementById('callout');
+    const calloutTitleEl = document.getElementById('callout-title');
+    const fieldMap = {
+      name: calloutEl.querySelector('[data-field="name"]'),
+      darwin: calloutEl.querySelector('[data-field="darwin"]'),
+      release: calloutEl.querySelector('[data-field="release"]'),
+      latest: calloutEl.querySelector('[data-field="latest"]'),
+      latestRelease: calloutEl.querySelector('[data-field="latest-release"]'),
+      status: calloutEl.querySelector('[data-field="status"]'),
+      statusDot: calloutEl.querySelector('.status-dot')
+    };
+
+    const statusColors = {
+      unsupported: '#ef4444',
+      supported: '#fbbf24',
+      latest: '#22c55e'
+    };
+
+    function formatDate(value) {
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function computeGaps(items) {
+      const dates = items.map(item => new Date(item.release_date));
+      const gaps = dates.map((date, index) => {
+        if (index === 0) return 0;
+        const prev = dates[index - 1];
+        return Math.max(0, (prev - date) / (1000 * 60 * 60 * 24)); // days
+      });
+      const maxGap = Math.max(...gaps);
+      const maxGapPx = 240;
+      const pxPerDay = maxGap > 0 ? maxGapPx / maxGap : 0;
+      const gapHeights = gaps.map((gap, index) => index === 0 ? 0 : Math.max(16, gap * pxPerDay));
+      return gapHeights;
+    }
+
+    function renderTimeline(data) {
+      const items = [...data].sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+      const gaps = computeGaps(items);
+
+      const fragment = document.createDocumentFragment();
+      items.forEach((item, index) => {
+        const gap = gaps[index] || 0;
+        const node = document.createElement('article');
+        node.className = 'timeline-item';
+        node.style.setProperty('--gap', `${gap}px`);
+        node.innerHTML = `
+          <div class="release-date">${formatDate(item.release_date)}</div>
+          <button class="node" type="button" data-index="${index}" aria-label="${item.version} ${item.name}" data-version="${item.version}"></button>
+          <div class="label">
+            <span class="version">${item.version}</span>
+            <span class="dash">/</span>
+            <span class="name">${item.name}</span>
+          </div>
+        `;
+        fragment.appendChild(node);
+      });
+      timelineEl.innerHTML = '';
+      timelineEl.appendChild(fragment);
+
+      timelineEl.querySelectorAll('.node').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const index = Number(btn.dataset.index);
+          showCallout(btn, items[index]);
+        });
+      });
+    }
+
+    function showCallout(target, item) {
+      calloutTitleEl.textContent = item.version;
+      fieldMap.name.textContent = item.name;
+      fieldMap.darwin.textContent = item.darwin_version;
+      fieldMap.release.textContent = formatDate(item.release_date);
+      fieldMap.latest.textContent = item.latest_version;
+      fieldMap.latestRelease.textContent = formatDate(item.latest_version_release_date);
+      fieldMap.status.textContent = item.support_status;
+
+      const color = statusColors[item.support_status.toLowerCase()] || '#9ca3af';
+      fieldMap.statusDot.style.backgroundColor = color;
+
+      const rect = target.getBoundingClientRect();
+      calloutEl.style.display = 'block';
+      calloutEl.setAttribute('aria-hidden', 'false');
+
+      // Position callout to the right of the circle, clamped within the viewport.
+      const calloutRect = calloutEl.getBoundingClientRect();
+      const top = rect.top + window.scrollY - calloutRect.height / 2 + rect.height / 2;
+      const left = rect.left + window.scrollX + 36;
+      const maxLeft = window.innerWidth - calloutRect.width - 16;
+      const clampedLeft = Math.max(16, Math.min(left, maxLeft));
+      const clampedTop = Math.max(16, top);
+
+      calloutEl.style.top = `${clampedTop}px`;
+      calloutEl.style.left = `${clampedLeft}px`;
+      calloutEl.classList.add('visible');
+    }
+
+    function hideCallout() {
+      calloutEl.classList.remove('visible');
+      calloutEl.setAttribute('aria-hidden', 'true');
+      calloutEl.style.display = 'none';
+    }
+
+    document.addEventListener('click', event => {
+      if (!calloutEl.classList.contains('visible')) return;
+      if (event.target.closest('.node') || event.target.closest('.callout')) return;
+      hideCallout();
+    });
+
+    document.getElementById('callout-close').addEventListener('click', event => {
+      event.stopPropagation();
+      hideCallout();
+    });
+
+    fetch('data/osx.json')
+      .then(response => response.json())
+      .then(renderTimeline)
+      .catch(error => {
+        timelineEl.innerHTML = '<p class="error">Failed to load timeline data.</p>';
+        console.error(error);
+      });
+  </script>
+</body>
+</html>
