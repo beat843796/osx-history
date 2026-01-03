@@ -45,9 +45,9 @@ body {
 
 .timeline-item {
   display: grid;
-  grid-template-columns: minmax(120px, 1fr) auto minmax(160px, 1fr);
+  grid-template-columns: minmax(140px, 1fr) auto minmax(200px, 1fr);
   align-items: center;
-  gap: 30px;
+  gap: 26px;
   position: relative;
   margin-top: var(--gap, 0);
   z-index: 1;
@@ -90,15 +90,22 @@ body {
 
 .node {
   position: relative;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #0f172a;
-  background: #0ea5e9;
+  width: 80px;
+  height: 80px;
+  border: 2px solid #000;
+  background: #ffffff;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-clip: padding-box;
   border-radius: 50%;
   cursor: pointer;
   transition: transform 120ms ease, box-shadow 120ms ease;
   z-index: 2;
-  overflow: visible;
+  overflow: hidden;
+  justify-self: center;
+  -webkit-appearance: none;
+  padding: 0;
 }
 
 .node:hover,
@@ -106,21 +113,6 @@ body {
   transform: scale(1.05);
   box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
   outline: none;
-}
-
-.timeline-item:not(:first-child) .node::before {
-  content: none;
-}
-
-.node::after {
-  content: "";
-  position: absolute;
-  inset: -8px;
-  background: #0ea5e9;
-  border-radius: 50%;
-  z-index: 3;
-  box-shadow: 0 0 0 10px #f5f7fb;
-  pointer-events: none;
 }
 
 .callout {

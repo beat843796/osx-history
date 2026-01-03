@@ -6,7 +6,8 @@
     "release_date": "2001-03-24",
     "latest_version": "10.0.4",
     "latest_version_release_date": "2001-06-22",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10"
   },
   {
     "version": "Mac OS X 10.1",
@@ -15,7 +16,8 @@
     "release_date": "2001-09-25",
     "latest_version": "10.1.5",
     "latest_version_release_date": "2002-06-06",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-1"
   },
   {
     "version": "Mac OS X 10.2",
@@ -24,7 +26,8 @@
     "release_date": "2002-08-24",
     "latest_version": "10.2.8",
     "latest_version_release_date": "2003-10-03",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-2"    
   },
   {
     "version": "Mac OS X 10.3",
@@ -33,7 +36,8 @@
     "release_date": "2003-10-24",
     "latest_version": "10.3.9",
     "latest_version_release_date": "2005-04-15",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-3"
   },
   {
     "version": "Mac OS X 10.4",
@@ -42,7 +46,8 @@
     "release_date": "2005-04-29",
     "latest_version": "10.4.11",
     "latest_version_release_date": "2007-11-14",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-4"
   },
   {
     "version": "Mac OS X 10.5",
@@ -51,7 +56,8 @@
     "release_date": "2007-10-26",
     "latest_version": "10.5.8",
     "latest_version_release_date": "2009-08-13",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-5"
   },
   {
     "version": "Mac OS X 10.6",
@@ -60,7 +66,8 @@
     "release_date": "2009-08-28",
     "latest_version": "10.6.8",
     "latest_version_release_date": "2011-07-25",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-6"
   },
   {
     "version": "OS X 10.7",
@@ -69,7 +76,8 @@
     "release_date": "2011-07-20",
     "latest_version": "10.7.5",
     "latest_version_release_date": "2012-10-04",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-7"
   },
   {
     "version": "OS X 10.8",
@@ -78,7 +86,8 @@
     "release_date": "2012-07-25",
     "latest_version": "10.8.5",
     "latest_version_release_date": "2015-08-13",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-8"
   },
   {
     "version": "OS X 10.9",
@@ -87,7 +96,8 @@
     "release_date": "2013-10-22",
     "latest_version": "10.9.5",
     "latest_version_release_date": "2016-07-18",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-9"
   },
   {
     "version": "OS X 10.10",
@@ -96,7 +106,8 @@
     "release_date": "2014-10-16",
     "latest_version": "10.10.5",
     "latest_version_release_date": "2017-07-19",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-10"
   },
   {
     "version": "OS X 10.11",
@@ -105,7 +116,8 @@
     "release_date": "2015-09-30",
     "latest_version": "10.11.6",
     "latest_version_release_date": "2018-07-09",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-11"
   },
   {
     "version": "macOS 10.12",
@@ -114,7 +126,8 @@
     "release_date": "2016-09-20",
     "latest_version": "10.12.6",
     "latest_version_release_date": "2019-09-26",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-12"
   },
   {
     "version": "macOS 10.13",
@@ -123,7 +136,8 @@
     "release_date": "2017-09-25",
     "latest_version": "10.13.6",
     "latest_version_release_date": "2020-11-12",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-13"
   },
   {
     "version": "macOS 10.14",
@@ -132,7 +146,8 @@
     "release_date": "2018-09-24",
     "latest_version": "10.14.6",
     "latest_version_release_date": "2021-07-21",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-14"
   },
   {
     "version": "macOS 10.15",
@@ -141,7 +156,8 @@
     "release_date": "2019-10-07",
     "latest_version": "10.15.7",
     "latest_version_release_date": "2022-07-20",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-15"
   },
   {
     "version": "macOS 11",
@@ -150,7 +166,8 @@
     "release_date": "2020-11-12",
     "latest_version": "11.7.10",
     "latest_version_release_date": "2023-09-11",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-16"
   },
   {
     "version": "macOS 12",
@@ -159,7 +176,8 @@
     "release_date": "2021-10-25",
     "latest_version": "12.7.6",
     "latest_version_release_date": "2024-07-29",
-    "support_status": "Unsupported"
+    "support_status": "Unsupported",
+    "id": "10-17"
   },
   {
     "version": "macOS 13",
@@ -168,7 +186,8 @@
     "release_date": "2022-10-24",
     "latest_version": "13.7.8",
     "latest_version_release_date": "2025-08-20",
-    "support_status": "Supported"
+    "support_status": "Supported",
+    "id": "10-18"
   },
   {
     "version": "macOS 14",
@@ -177,7 +196,8 @@
     "release_date": "2023-09-26",
     "latest_version": "14.8.3",
     "latest_version_release_date": "2025-12-12",
-    "support_status": "Supported"
+    "support_status": "Supported",
+    "id": "10-19"
   },
   {
     "version": "macOS 15",
@@ -186,7 +206,8 @@
     "release_date": "2024-09-16",
     "latest_version": "15.7.3",
     "latest_version_release_date": "2025-12-12",
-    "support_status": "Supported"
+    "support_status": "Supported",
+    "id": "10-20"
   },
   {
     "version": "macOS 26",
@@ -195,6 +216,7 @@
     "release_date": "2025-09-15",
     "latest_version": "26.2",
     "latest_version_release_date": "2025-12-12",
-    "support_status": "Latest"
+    "support_status": "Latest",
+    "id": "10-21"
   }
 ]

@@ -9,7 +9,7 @@
 <body>
   <main class="page">
     <header class="page-header">
-      <h1>macOS Release Timeline</h1>
+      <h1>OSX</h1>
     </header>
 
     <section id="timeline" class="timeline" aria-label="macOS release timeline"></section>
@@ -71,6 +71,34 @@
       latest: '#22c55e'
     };
 
+    function setNodeImage(circle, id) {
+      if (!id) return;
+      const candidates = [
+        `img/${id}_icon.png`,
+        `img/${id}_icon.png.webp`,
+        `img/${id}_logo.png`,
+        `img/${id}_logo.png.webp`,
+        `img/${id}_desktop.png`,
+        `img/${id}_desktop.jpg`
+      ];
+
+      const tryNext = (index = 0) => {
+        if (index >= candidates.length) {
+          console.warn(`No image found for id ${id}`);
+          return;
+        }
+        const src = candidates[index];
+        const img = new Image();
+        img.onload = () => {
+          circle.style.backgroundImage = `url(${src})`;
+        };
+        img.onerror = () => tryNext(index + 1);
+        img.src = src;
+      };
+
+      tryNext();
+    }
+
     function formatDate(value) {
       const date = new Date(value);
       if (Number.isNaN(date.getTime())) return value;
@@ -110,6 +138,10 @@
             <span class="name">${item.name}</span>
           </div>
         `;
+
+        const circle = node.querySelector('.node');
+        setNodeImage(circle, item.id);
+
         fragment.appendChild(node);
       });
       timelineEl.innerHTML = '';
@@ -141,8 +173,8 @@
 
       // Position callout to the right of the circle, clamped within the viewport.
       const calloutRect = calloutEl.getBoundingClientRect();
-      const top = rect.top + window.scrollY - calloutRect.height / 2 + rect.height / 2;
-      const left = rect.left + window.scrollX + 36;
+      const top = rect.top + window.scrollY + rect.height / 2 - calloutRect.height / 2;
+      const left = rect.left + window.scrollX + rect.width + 16;
       const maxLeft = window.innerWidth - calloutRect.width - 16;
       const clampedLeft = Math.max(16, Math.min(left, maxLeft));
       const clampedTop = Math.max(16, top);
